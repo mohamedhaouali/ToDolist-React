@@ -1,0 +1,155 @@
+**************App.css
+
+.App {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 50px;
+}
+
+.App .title {
+  font-size: 5rem;
+  padding: 0px 20px 0px 20px;
+  background-color: rgb(242, 255, 123);
+  border-radius: 10px;
+  border: 2px solid black;
+  align-self: center;
+  color: #1b1b1b;
+  font-family: "Covered By Your Grace", cursive;
+}
+
+*****************App.js
+
+import './App.css';
+import TodoApp from './components/TodoApp';
+
+
+function App() {
+  return (
+    <div className="App">
+      <span className="title">Todo List</span> <br />
+      <TodoApp />
+    </div>
+  );
+}
+
+export default App;
+
+***************** Todo App
+
+import React, { useState } from 'react';
+import "./todoapp.css"
+
+function TodoApp() {
+
+
+    // task
+    const [task, setTask] = useState("");
+
+    // button
+    const handleChange = (e) => {
+        setTask(e.target.value);
+    };
+
+    // ajout
+
+    const AddTask = () => {
+        console.log(task);
+    }
+
+    return (
+
+        <div className="todo">
+            <input
+                type="text"
+                name="text"
+                id="text"
+
+                placeholder="Add task here..."
+            />
+
+            <button className="add-btn" onClick={AddTask} >
+                Add
+            </button>
+        </div>
+
+    )
+}
+
+export default TodoApp
+
+*************************Add
+
+import React, { useState } from 'react';
+import "./todoapp.css"
+
+function TodoApp() {
+
+
+    // task
+    const [task, setTask] = useState("");
+    //
+    const [tasklist, setTaskList] = useState([]);
+
+    // button
+    const handleChange = (e) => {
+        setTask(e.target.value);
+    };
+
+    // ajout
+
+    const AddTask = () => {
+        //console.log(task);
+
+        if (task !== "") {
+            const taskDetails = {
+                id: Math.floor(Math.random() * 1000),
+                value: task,
+                isCompleted: false,
+            };
+
+            setTaskList([...tasklist, taskDetails]);
+        }
+    };
+
+    console.log("taskList", tasklist)
+
+    return (
+
+        <div className="todo">
+            <input
+                type="text"
+                name="text"
+                id="text"
+                onChange={(e) => handleChange(e)}
+
+                placeholder="Add task here..."
+            />
+
+            <button className="add-btn" onClick={AddTask} >
+                Add
+            </button>
+            <br />
+            {tasklist !== [] ?
+                <ul>
+                    {tasklist.map(t =>
+                        <li className="listitem">{t.value}</li>
+                    )}
+                </ul>
+
+                : null}
+
+        </div>
+
+    )
+}
+
+export default TodoApp
+
+
+************************************delete
+
+  <button className="delete" onClick={(e) => deletetask(e, t.id)}>
+                Delete
+              </button>
+			  
+****************************			  
